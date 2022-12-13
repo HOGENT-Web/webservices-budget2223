@@ -14,7 +14,8 @@ async function main() {
 
     process.on('SIGTERM', onClose);
     process.on('SIGQUIT', onClose);
-  } catch (error) {
+  } catch (error){
+    console.error(error); // print the error before exiting
     process.exit(-1);
   }
 }

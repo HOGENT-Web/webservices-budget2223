@@ -88,20 +88,7 @@ async function initializeData() {
     logger.error('Error while migrating the database', {
       error,
     });
-  }
-
-  // Undo last migration if something failed
-  if (migrationsFailed) {
-    try {
-      await knexInstance.migrate.down();
-    } catch (error) {
-      logger.error('Error while undoing last migration', {
-        error,
-      });
-    }
-
-    // No point in starting the server
-    throw new Error('Migrations failed');
+    throw error;
   }
 
   // Run seeds in development
